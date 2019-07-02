@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
 .App {
   text-align: center;
 }
@@ -30,4 +32,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+ul {
+    list-style: none;
+    padding-left: 1.2em;
+    text-indent: -1.2em;
+}
+
+li:before {
+    content: "\2B50 \A0";
+    color: #ff0000;
+}
+
+li span {
+  position: relative;
+  left: 10px;
 }

@@ -1,0 +1,108 @@
+import React from 'react';
+import logo from '../logo.svg';
+import '../style/App.css';
+import {LiveProvider, LiveEditor, LivePreview, LiveError} from 'react-live';
+import ModalCard from '../components/Modal';
+import FilterContainer from './FilterContainer';
+import SearchBox from '../components/SearchBox';
+import CardList from './CardList';
+import master from '../database/master';
+import Scroll from '../components/Scroll';
+
+
+
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      filtersArr : [],
+      searchField : '',
+      finalList:[],
+      showModal: false,
+      url: '',
+    };
+  }
+
+  updateFilter = async (arr) => {
+    await this.setState({filtersArr:arr});
+    await this.updateFinal()
+  }
+
+  updateSearch = async (event) => {
+
+    await this.setState({searchField:event.target.value.toLowerCase()});
+    await this.updateFinal()
+  }
+
+  checkExist = (stuff) => {
+    if(typeof(stuff['name']) === 'string'){
+      if (stuff['name'].toLowerCase().includes(this.state.searchField)) {
+        return true;
+      }
+    } else if(typeof(stuff['title'] === 'string')){
+        if(stuff['title'].toLowerCase().includes(this.state.searchField)) {
+          return true;
+      }
+    }
+    return false;
+  }
+
+  updateFinal = () => {
+    this.setState({finalList: this.state.filtersArr.filter(i => this.checkExist(i))});
+  }
+
+  initializeModal = async (url) => {
+    await this.setState({url:url});
+    if (!this.state.showModal) {
+      await this.setState({showModal:true});
+    }
+  }
+
+  close = async (event) => {
+    await this.setState({showModal:false});
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+
+      return(
+        <div style={{
+          height:'100vh',
+          backgroundImage: "url(" + "https://steamuserimages-a.akamaihd.net/ugc/916912476088733298/A9222CAD7EAE0A34395B21322CE4742610E9B422/" + ")",
+          backgroundPosition: 'absolute',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        }}>
+          <div className='flex flex-column items-center'>
+            <h1 style={{fontFamily:"'Press Start 2P', cursive",color:'yellow'}} >STAR WARS SEARCH ENGINE</h1>
+            <SearchBox updateSearch={this.updateSearch} />
+            <h2 className='f2 self-start ph4 white underline'>Filters:</h2>
+            <FilterContainer updateFilter={this.updateFilter} data={master}/>
+            <Scroll className='bt b--white bw2'>
+              <CardList finalList={this.state.finalList} initializeModal={this.initializeModal} data={master}/>
+            </Scroll>
+            <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal}/>
+          </div>
+        </div>
+      )
+  }
+}
+
+
+// const App = () => (
+//   <LiveProvider code= {code} scope={{Modal}}>
+//     <LiveEditor/>
+//     <LivePreview/>
+//     <LiveError/>
+//   </LiveProvider>
+// );
+
+// style={{
+
+// }}
+
+export default App;
