@@ -2,12 +2,13 @@
 // let response = 'gay';
 
 
-// fetch('https://swapi.co/api/species/38')
+// fetch('https://swapi.co/api/species/36',{mode: 'no-cors'})
 // 	.then(function(res) {
 // 		if (res === '404 Error') {
 // 			console.log('there is something wrong');
 // 		}
-// 	})
+// 		return res;
+// 	}).then(res => console.log(res.json()))
 
 const films =
 {

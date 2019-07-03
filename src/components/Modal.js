@@ -41,9 +41,8 @@ class ModalCard extends React.Component {
 
 
   render() {
-    if(this.props.show === true){console.log('ca mau');this.getData();}
+    if(this.props.show === true){this.getData();}
     if (this.data.url !== undefined){
-      console.log('ainoi');
       if (this.props.url.length > 1) {
         this.type = this.re.exec(this.props.url)[1];
       }
@@ -76,7 +75,7 @@ class ModalCard extends React.Component {
         <Modal.Title><span className={`pa1 ${this.color} bg-black di br2`}>#{this.type}</span>  {this.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ul >
+        <ul>
           {this.list}
         </ul>
       </Modal.Body>
