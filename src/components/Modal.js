@@ -11,11 +11,6 @@ class ModalCard extends React.Component {
 
     };
     this.re = new RegExp("https://swapi.co/api/([a-z]*)/");
-    // try {
-    //   this.type = this.re.exec(this.props.url)[1];
-    // } catch (e) {
-    //   console.log(this.props.url);
-    // }
     this.type = '';
     this.list = [];
     this.name = '';
@@ -30,7 +25,7 @@ class ModalCard extends React.Component {
 
 
   componentDidMount() {
-    this.getData();
+
   }
 
   getData = () => {
@@ -40,23 +35,15 @@ class ModalCard extends React.Component {
     master.forEach(thing => {
       this.testSet = this.testSet.concat(thing['assocArray']);
     });
-    const temp = this.testSet.filter(thing => this.test(thing['url']));
+    const temp = this.testSet.filter(thing => thing['url'] === this.props.url);
     this.data = temp[0];
   }
 
-  test = (thing) => {
-
-    if (thing === this.props.url) {
-      console.log(thing,this.props.url);
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   render() {
-    this.getData();
-    if (this.data != undefined){
+    if(this.props.show === true){console.log('ca mau');this.getData();}
+    if (this.data.url !== undefined){
+      console.log('ainoi');
       if (this.props.url.length > 1) {
         this.type = this.re.exec(this.props.url)[1];
       }
@@ -68,15 +55,17 @@ class ModalCard extends React.Component {
                   corresValue = 'None';
             } else {
               corresValue = corresValue.map(v => {
-                return <LinkModal url={v} clickedmodal={this.otherModal}/>
+                return <LinkModal key={v} url={v} data={this.testSet} clickedmodal={this.otherModal}/>
               })
             }
           } else if(String(corresValue).includes('https')) {
-            corresValue= <LinkModal url={corresValue} clickedmodal={this.otherModal}/>
+            corresValue= <LinkModal url={corresValue} clickedmodal={this.otherModal} data={this.testSet}/>
           }
-          return <li><span><b style={{textTransform:'capitalize'}}>{key.replace('_',' ')}:</b> {corresValue}</span></li>
+          return <li key={key}><span><b style={{textTransform:'capitalize'}}>{key.replace('_',' ')}:</b> {corresValue}</span></li>
         }
-      });
+        return null;
+      }
+    );
       this.name = (this.type === 'films')? this.data['title'] : this.data['name'];
       this.color = master.filter(i => i.type === this.type)[0].tachColor;
     }
@@ -84,7 +73,7 @@ class ModalCard extends React.Component {
 
     <Modal show={this.props.show} onHide={this.props.close} scrollable={true} className='shadow-4'>
       <Modal.Header closeButton className={`h3 bg-${this.color}`}>
-        <Modal.Title ><span className={`pa1 ${this.color} bg-black di br2`}>#{this.type}</span>  {this.name}</Modal.Title>
+        <Modal.Title><span className={`pa1 ${this.color} bg-black di br2`}>#{this.type}</span>  {this.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <ul >

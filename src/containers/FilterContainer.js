@@ -12,15 +12,12 @@ class FilterContainer extends React.Component {
     this.FiltersList = this.data.map(obj =>
       {
         return(
-        <FilterBox type={obj.type} assocArray={obj.assocArray} tachColor={obj.tachColor} hexColor={obj.hexColor} filterClicked={this.updateFilterList}/>)
+        <FilterBox type={obj.type} key={obj.type} assocArray={obj.assocArray} tachColor={obj.tachColor} hexColor={obj.hexColor} filterClicked={this.updateFilterList}/>)
       }
     );
     this.updateRawList =this.updateRawList.bind(this);
   }
 
-  checkStatus = (filter) => {
-    return this.state[filter.props.type] === 'on'
-  }
 
   updateFilterList = async (type) => {
     if (this.state[type] === 'on') {
@@ -33,7 +30,7 @@ class FilterContainer extends React.Component {
 
   updateRawList = async () => {
     this.rawList = [];
-    const tempList = this.FiltersList.filter(this.checkStatus);
+    const tempList = this.FiltersList.filter(filter => this.state[filter.props.type] === 'on');
     tempList.forEach(e => {
       this.rawList = this.rawList.concat(e.props.assocArray);
     });

@@ -1,7 +1,5 @@
 import React from 'react';
-import logo from '../logo.svg';
 import '../style/App.css';
-import {LiveProvider, LiveEditor, LivePreview, LiveError} from 'react-live';
 import ModalCard from '../components/Modal';
 import FilterContainer from './FilterContainer';
 import SearchBox from '../components/SearchBox';
@@ -21,6 +19,7 @@ class App extends React.Component {
       finalList:[],
       showModal: false,
       url: '',
+      master:[],
     };
   }
 
@@ -72,7 +71,7 @@ class App extends React.Component {
       return(
         <div style={{
           height:'100vh',
-          backgroundImage: "url(" + "https://steamuserimages-a.akamaihd.net/ugc/916912476088733298/A9222CAD7EAE0A34395B21322CE4742610E9B422/" + ")",
+          backgroundImage: "url(https://steamuserimages-a.akamaihd.net/ugc/916912476088733298/A9222CAD7EAE0A34395B21322CE4742610E9B422/)",
           backgroundPosition: 'absolute',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'

@@ -27,7 +27,7 @@ class CardList extends React.Component {
       if (type === 'films') {
         name = item['title'];
       } else { name = item['name'];}
-      return (<Card name={name} type={type} url={url} data={this.props.data} seeMoreInfo = {this.seeMoreInfo}/>);
+      return (<Card name={name} key={name} type={type} url={url} data={this.props.data} seeMoreInfo = {this.seeMoreInfo}/>);
     });
     return(
       <div className='mv5 mh5 flex flex-wrap justify-center'>
