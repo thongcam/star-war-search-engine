@@ -62,6 +62,11 @@ class App extends React.Component {
     await this.setState({showModal:false});
   }
 
+  alert = () =>{
+    alert('An app that helps you search for any Star Wars stuff through the SWAPI.');
+
+  }
+
   componentDidMount() {
 
   }
@@ -70,7 +75,7 @@ class App extends React.Component {
 
       return(
         <div style={{
-          height:'100vh',
+          height:'auto',
           backgroundImage: "url(https://steamuserimages-a.akamaihd.net/ugc/916912476088733298/A9222CAD7EAE0A34395B21322CE4742610E9B422/)",
           backgroundPosition: 'absolute',
           backgroundSize: 'cover',
@@ -86,6 +91,13 @@ class App extends React.Component {
             </Scroll>
             <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal}/>
           </div>
+          <div className='bg-dark-gray footer'>
+            <div className="col">
+              <img src={require("../GitHub-Mark-32px.png")} alt=""/>
+              <a href="https://github.com/thongcam/star-war-search-engine" className='link underline-hover white f5 ml2'>View on GitHub</a>
+              <div onClick={this.alert} className='link underline-hover white f5 ml4'>About this app</div>
+            </div>
+          </div>
         </div>
       )
   }
@@ -100,8 +112,8 @@ class App extends React.Component {
 //   </LiveProvider>
 // );
 
-// style={{
 
-// }}
+
+
 
 export default App;

@@ -49,3 +49,18 @@ li span {
   position: relative;
   left: 10px;
 }
+
+.footer {
+  display: flex;
+  height:10vh;
+  width: 100vw;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 2em;
+}
+
+.col {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
