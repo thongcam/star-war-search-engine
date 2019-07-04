@@ -60,7 +60,7 @@ class ModalCard extends React.Component {
           } else if(String(corresValue).includes('https')) {
             corresValue= <LinkModal url={corresValue} clickedmodal={this.otherModal} data={this.testSet}/>
           }
-          return <li key={key}><span><b style={{textTransform:'capitalize'}}>{key.replace('_',' ')}:</b> {corresValue}</span></li>
+          return <li key={key}><span><b style={{textTransform:'capitalize'}}>{key.split('_').join(' ')}:</b> {corresValue}</span></li>
         }
         return null;
       }
