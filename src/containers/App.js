@@ -95,7 +95,7 @@ class App extends React.Component {
             <div className="col">
               <img src={require("../GitHub-Mark-32px.png")} alt=""/>
               <a href="https://github.com/thongcam/star-war-search-engine" className='link underline-hover white f5 ml2'>View on GitHub</a>
-              <div onClick={this.alert} className='link underline-hover white f5 ml4'>About this app</div>
+              <div onClick={this.alert} className='link underline-hover white f5 ml4' style={{cursor:'pointer'}}>About this app</div>
             </div>
           </div>
         </div>
