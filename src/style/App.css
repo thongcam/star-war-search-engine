@@ -64,3 +64,7 @@ li span {
   flex-direction: row;
   align-items: center;
 }
+
+.scroll {
+  -webkit-overflow-scrolling: touch;
+}
