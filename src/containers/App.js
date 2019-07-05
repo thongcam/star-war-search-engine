@@ -6,6 +6,7 @@ import SearchBox from '../components/SearchBox';
 import CardList from './CardList';
 import master from '../database/master';
 import Scroll from '../components/Scroll';
+import ScrollUpButton from 'react-scroll-up-button';
 
 
 
@@ -91,6 +92,7 @@ class App extends React.Component {
             </Scroll>
             <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal}/>
           </div>
+          <div><ScrollUpButton style={{margin:' 4vh 3vw'}} className='grow'/></div>
           <div className='bg-dark-gray footer'>
             <div className="col">
               <img src={require("../GitHub-Mark-32px.png")} alt=""/>
