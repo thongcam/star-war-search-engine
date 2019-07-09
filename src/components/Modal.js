@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import LinkModal from './linkModal';
-import master from '../database/master';
+
 
 
 class ModalCard extends React.Component {
@@ -29,10 +29,7 @@ class ModalCard extends React.Component {
   }
 
   getData = () => {
-    // fetch(this.props.url)
-    //   .then(response => response.json())
-    //   .then(datajs => this.data = datajs);
-    master.forEach(thing => {
+    this.props.master.forEach(thing => {
       this.testSet = this.testSet.concat(thing['assocArray']);
     });
     const temp = this.testSet.filter(thing => thing['url'] === this.props.url);
@@ -66,7 +63,7 @@ class ModalCard extends React.Component {
       }
     );
       this.name = (this.type === 'films')? this.data['title'] : this.data['name'];
-      this.color = master.filter(i => i.type === this.type)[0].tachColor;
+      this.color = this.props.master.filter(i => i.type === this.type)[0].tachColor;
     }
   return (
 

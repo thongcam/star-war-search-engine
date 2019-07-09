@@ -15,7 +15,7 @@ class FilterContainer extends React.Component {
         <FilterBox type={obj.type} key={obj.type} assocArray={obj.assocArray} tachColor={obj.tachColor} hexColor={obj.hexColor} filterClicked={this.updateFilterList}/>)
       }
     );
-    this.updateRawList =this.updateRawList.bind(this);
+    this.updateRawList = this.updateRawList.bind(this);
   }
 
 

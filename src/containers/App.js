@@ -4,11 +4,17 @@ import ModalCard from '../components/Modal';
 import FilterContainer from './FilterContainer';
 import SearchBox from '../components/SearchBox';
 import CardList from './CardList';
-import master from '../database/master';
 import Scroll from '../components/Scroll';
 import ScrollUpButton from 'react-scroll-up-button';
+import masterTemplate from './masterTemplate';
+import { css } from '@emotion/core';
+import { ScaleLoader } from 'react-spinners';
 
-
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 
 class App extends React.Component {
@@ -22,6 +28,7 @@ class App extends React.Component {
       url: '',
       master:[],
     };
+    this.asyncOp = this.asyncOp.bind(this);
   }
 
   updateFilter = async (arr) => {
@@ -68,12 +75,50 @@ class App extends React.Component {
 
   }
 
-  componentDidMount() {
+  asyncOp = async (category,i,array,obj) => {
+    const response = await fetch('https://swapi.co/api/'+ category +'/?page=' + i);
+    const objRes = await response.json();
+    if (objRes.next===null) {
+      array = await array.concat(objRes.results);
+      obj.assocArray = array
+      this.setState({
+        master: this.state.master.concat([obj])
+      })
+      return true;
+    } else {
+      i += 1;
+      array = await array.concat(objRes.results);
+      await this.asyncOp(category,i,array,obj);
+    }
+  }
 
+  componentDidMount() {
+    masterTemplate.forEach(async function(obj){
+      await this.asyncOp(obj.type,1,[],obj);
+    }, this);
   }
 
   render() {
-
+      const content = (this.state.master.length === 6)?
+        <div>
+          <FilterContainer updateFilter={this.updateFilter} data={this.state.master}/>
+          <Scroll className='bt b--white bw2'>
+            <CardList finalList={this.state.finalList} initializeModal={this.initializeModal} data={this.state.master}/>
+          </Scroll>
+          <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal} master={this.state.master}/>
+        </div>
+        :
+        <div className='sweet-loading tc mt4' style={{height:'55vh'}}>
+        <ScaleLoader
+          css={override}
+          height={50}
+          width={15}
+          radius={10}
+          sizeUnit={"px"}
+          color={'#FFF'}
+        />
+        <h2 className='mt2 white'>LOADING...</h2>
+      </div>
       return(
         <div style={{
           height:'auto',
@@ -86,11 +131,7 @@ class App extends React.Component {
             <h1 style={{fontFamily:"'Press Start 2P', cursive",color:'yellow'}} >STAR WARS SEARCH ENGINE</h1>
             <SearchBox updateSearch={this.updateSearch} />
             <h2 className='f2 self-start ph4 white underline'>Filters:</h2>
-            <FilterContainer updateFilter={this.updateFilter} data={master}/>
-            <Scroll className='bt b--white bw2'>
-              <CardList finalList={this.state.finalList} initializeModal={this.initializeModal} data={master}/>
-            </Scroll>
-            <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal}/>
+            {content}
           </div>
           <div><ScrollUpButton style={{margin:' 4vh 3vw'}} className='grow'/></div>
           <div className='bg-dark-gray footer'>
@@ -104,18 +145,5 @@ class App extends React.Component {
       )
   }
 }
-
-
-// const App = () => (
-//   <LiveProvider code= {code} scope={{Modal}}>
-//     <LiveEditor/>
-//     <LivePreview/>
-//     <LiveError/>
-//   </LiveProvider>
-// );
-
-
-
-
 
 export default App;

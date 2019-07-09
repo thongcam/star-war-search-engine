@@ -6,13 +6,6 @@ class CardList extends React.Component {
     super(props);
 
     this.re = new RegExp("https://swapi.co/api/([a-z]*)/");
-    // this.CardList = this.props.finalList.map(item => {
-    //   const url = item['url'];
-    //   const name =item['name'];
-    //   const type = this.re.exec(url)[0];
-    //   console.log(type);
-    //   return (<Card name={name} type={type} url={url}/>);
-    // });
   }
 
   seeMoreInfo = (url) => {
