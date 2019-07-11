@@ -46,7 +46,7 @@ class ModalCard extends React.Component {
       this.list =  Object.keys(this.data).map(key => {
         if(!['created','edited','url'].includes(key)){
           let corresValue = this.data[String(key)];
-          if (typeof(corresValue) === "object") {
+          if (typeof(corresValue) === "object" && corresValue!==null) {
             if (corresValue.length === 0) {
                   corresValue = 'None';
             } else {
@@ -56,6 +56,8 @@ class ModalCard extends React.Component {
             }
           } else if(String(corresValue).includes('https')) {
             corresValue= <LinkModal url={corresValue} clickedmodal={this.otherModal} data={this.testSet}/>
+          } else {
+            corresValue = 'None';
           }
           return <li key={key}><span><b style={{textTransform:'capitalize'}}>{key.split('_').join(' ')}:</b> {corresValue}</span></li>
         }
