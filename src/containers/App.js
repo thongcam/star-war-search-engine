@@ -1,4 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {
+  updateURL,
+  updateFilterArr,
+  updateFinalList,
+  updateSearchField,
+  updateShowModal,
+  concatMaster
+} from '../store/actions/index';
 import '../style/App.css';
 import ModalCard from '../components/Modal';
 import FilterContainer from './FilterContainer';
@@ -20,54 +29,34 @@ const override = css`
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      filtersArr : [],
-      searchField : '',
-      finalList:[],
-      showModal: false,
-      url: '',
-      master:[],
-    };
     this.asyncOp = this.asyncOp.bind(this);
   }
 
   updateFilter = async (arr) => {
-    await this.setState({filtersArr:arr});
+    await this.props.updateFilterArr(arr);
     await this.updateFinal()
   }
 
   updateSearch = async (event) => {
 
-    await this.setState({searchField:event.target.value.toLowerCase()});
+    await this.props.updateSearchField(event);
     await this.updateFinal()
   }
 
-  checkExist = (stuff) => {
-    if(typeof(stuff['name']) === 'string'){
-      if (stuff['name'].toLowerCase().includes(this.state.searchField)) {
-        return true;
-      }
-    } else if(typeof(stuff['title'] === 'string')){
-        if(stuff['title'].toLowerCase().includes(this.state.searchField)) {
-          return true;
-      }
-    }
-    return false;
-  }
 
   updateFinal = () => {
-    this.setState({finalList: this.state.filtersArr.filter(i => this.checkExist(i))});
+    this.props.updateFinalList();
   }
 
   initializeModal = async (url) => {
-    await this.setState({url:url});
-    if (!this.state.showModal) {
-      await this.setState({showModal:true});
+    await this.props.updateURL(url);
+    if (!this.props.showModal) {
+      await this.props.updateShowModal(true);
     }
   }
 
   close = async (event) => {
-    await this.setState({showModal:false});
+    await this.props.updateShowModal(false);
   }
 
   alert = () =>{
@@ -80,10 +69,8 @@ class App extends React.Component {
     const objRes = await response.json();
     if (objRes.next===null) {
       array = await array.concat(objRes.results);
-      obj.assocArray = array
-      this.setState({
-        master: this.state.master.concat([obj])
-      })
+      obj.assocArray = array;
+      this.props.concatMaster(obj);
       return true;
     } else {
       i += 1;
@@ -99,13 +86,13 @@ class App extends React.Component {
   }
 
   render() {
-      const content = (this.state.master.length === 6)?
+      const content = (this.props.master.length === 6)?
         <div>
-          <FilterContainer updateFilter={this.updateFilter} data={this.state.master}/>
+          <FilterContainer updateFilter={this.updateFilter} data={this.props.master}/>
           <Scroll className='bt b--white bw2'>
-            <CardList finalList={this.state.finalList} initializeModal={this.initializeModal} data={this.state.master}/>
+            <CardList finalList={this.props.finalList} initializeModal={this.initializeModal} data={this.props.master}/>
           </Scroll>
-          <ModalCard show={this.state.showModal} url={this.state.url} close={this.close} other={this.initializeModal} master={this.state.master}/>
+          <ModalCard show={this.props.showModal} url={this.props.url} close={this.close} other={this.initializeModal} master={this.props.master}/>
         </div>
         :
         <div className='sweet-loading tc mt4' style={{height:'55vh'}}>
@@ -146,4 +133,27 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    filtersArr : state.app.filtersArr,
+    searchField : state.app.searchField,
+    finalList: state.app.finalList,
+    showModal: state.app.showModal,
+    url: state.app.url,
+    master:state.app.master,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateURL: (url) => dispatch(updateURL(url)),
+    updateFilterArr: (arr) => dispatch(updateFilterArr(arr)),
+    updateFinalList: () => dispatch(updateFinalList()),
+    updateSearchField: (event) => dispatch(updateSearchField(event)),
+    updateShowModal: (bool) => dispatch(updateShowModal(bool)),
+    concatMaster: (obj) => dispatch(concatMaster(obj))
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
