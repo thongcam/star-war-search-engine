@@ -1,8 +1,23 @@
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none; 
+  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.title-grow {
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+
+.title-grow:hover {
+  transform: scale(1.05);
+}
+
+.title-grow:active {
+  transform: scale(0.9);
 }
