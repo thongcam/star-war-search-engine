@@ -125,8 +125,7 @@ class App extends React.Component {
       <div
         style={{
           height: "auto",
-          backgroundImage:
-            "url(https://steamuserimages-a.akamaihd.net/ugc/916912476088733298/A9222CAD7EAE0A34395B21322CE4742610E9B422/)",
+          backgroundImage: "url(" + process.env.PUBLIC_URL + "/2101913.jpg)",
           backgroundPosition: "absolute",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
