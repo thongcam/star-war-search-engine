@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/star-war-search-engine/./static/css/main.55d9d2a0.chunk.css",
-    "main.js": "/star-war-search-engine/./static/js/main.6bd43333.chunk.js",
-    "main.js.map": "/star-war-search-engine/./static/js/main.6bd43333.chunk.js.map",
+    "main.css": "/star-war-search-engine/./static/css/main.c648dbaa.chunk.css",
+    "main.js": "/star-war-search-engine/./static/js/main.81dc9700.chunk.js",
+    "main.js.map": "/star-war-search-engine/./static/js/main.81dc9700.chunk.js.map",
     "runtime~main.js": "/star-war-search-engine/./static/js/runtime~main.c535d77d.js",
     "runtime~main.js.map": "/star-war-search-engine/./static/js/runtime~main.c535d77d.js.map",
     "static/css/2.31dafeb2.chunk.css": "/star-war-search-engine/./static/css/2.31dafeb2.chunk.css",
     "static/js/2.9fcd3c2c.chunk.js": "/star-war-search-engine/./static/js/2.9fcd3c2c.chunk.js",
     "static/js/2.9fcd3c2c.chunk.js.map": "/star-war-search-engine/./static/js/2.9fcd3c2c.chunk.js.map",
     "index.html": "/star-war-search-engine/./index.html",
-    "precache-manifest.15bc6eec42e1a72014f5679f9b6395ce.js": "/star-war-search-engine/./precache-manifest.15bc6eec42e1a72014f5679f9b6395ce.js",
+    "precache-manifest.08d3083fa2dbec8378e2301f4a66eedd.js": "/star-war-search-engine/./precache-manifest.08d3083fa2dbec8378e2301f4a66eedd.js",
     "service-worker.js": "/star-war-search-engine/./service-worker.js",
     "static/css/2.31dafeb2.chunk.css.map": "/star-war-search-engine/./static/css/2.31dafeb2.chunk.css.map",
-    "static/css/main.55d9d2a0.chunk.css.map": "/star-war-search-engine/./static/css/main.55d9d2a0.chunk.css.map"
+    "static/css/main.c648dbaa.chunk.css.map": "/star-war-search-engine/./static/css/main.c648dbaa.chunk.css.map"
   }
 }
