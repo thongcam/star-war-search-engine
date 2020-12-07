@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5afc86871918b5d5f70e8ce3a9dee171",
+    "revision": "fc07b4f82e0c35cfa3497a77aed72fb9",
     "url": "/star-war-search-engine/./index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/star-war-search-engine/./static/css/2.31dafeb2.chunk.css"
   },
   {
-    "revision": "52a1aebfb593bdeb92d9",
+    "revision": "25d15796f8cdb172bd2b",
     "url": "/star-war-search-engine/./static/css/main.c648dbaa.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/star-war-search-engine/./static/js/2.9fcd3c2c.chunk.js"
   },
   {
-    "revision": "52a1aebfb593bdeb92d9",
-    "url": "/star-war-search-engine/./static/js/main.81dc9700.chunk.js"
+    "revision": "25d15796f8cdb172bd2b",
+    "url": "/star-war-search-engine/./static/js/main.c8c36641.chunk.js"
   },
   {
     "revision": "3d43760b2a0e8f187794",
